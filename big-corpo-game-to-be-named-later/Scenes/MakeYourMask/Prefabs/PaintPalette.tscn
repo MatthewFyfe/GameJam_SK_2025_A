@@ -25,8 +25,8 @@ anchor_right = 1.0
 offset_bottom = 16.0
 grow_horizontal = 2
 min_value = 1.0
-max_value = 11.0
-value = 3.0
+max_value = 25.0
+value = 5.0
 
 [node name="Label" type="Label" parent="Panel/HSlider"]
 layout_mode = 1
