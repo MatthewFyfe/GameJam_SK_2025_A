@@ -17,20 +17,48 @@ current_color_rect = NodePath("../PaintPalette/Panel/CurrentPaintColor")
 painter_image = NodePath("../../../PainterCanvas")
 current_color_rect = NodePath("../CurrentPaintColor")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button_DoneMask" type="Button" parent="."]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -8.0
+offset_left = -652.0
+offset_top = -31.0
+offset_right = -557.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "DONE"
+text = "Done Mask"
+
+[node name="Button_DoneHeightMap" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -352.0
+offset_top = -31.0
+offset_right = -213.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Done Heightmap"
+
+[node name="Button_DonePainting" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Done Painting"
 
 [connection signal="value_changed" from="PaintPalette/Panel/HSlider" to="PainterCanvas" method="_on_h_slider_value_changed"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button_DoneMask" to="." method="_on_button_done_mask_pressed"]
+[connection signal="pressed" from="Button_DoneHeightMap" to="." method="_on_button_done_height_map_pressed"]
+[connection signal="pressed" from="Button_DonePainting" to="." method="_on_button_done_painting_pressed"]
 
 [editable path="PainterCanvas"]
 [editable path="PaintPalette"]
