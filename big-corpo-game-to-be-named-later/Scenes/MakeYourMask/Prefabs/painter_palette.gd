@@ -31,7 +31,7 @@ func set_palette_mode(mode : int) -> void :
 			eraser_ref.color = painter_image.canvas_bg
 			index += 1
 			
-	#set to greyscale
+	#set to greyscale, enable intensity slider?
 	if mode == 2:
 		for child in get_children():
 			if index != 0 and index != 1 and index != 8:
