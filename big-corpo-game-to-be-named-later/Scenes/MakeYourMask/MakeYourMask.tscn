@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ciehhml8pkd35"]
+[gd_scene load_steps=12 format=3 uid="uid://ciehhml8pkd35"]
 
 [ext_resource type="Script" uid="uid://bglw8b81wkuao" path="res://Scenes/MakeYourMask/make_your_mask.gd" id="1_217l0"]
 [ext_resource type="PackedScene" uid="uid://c1gjn276iqw6q" path="res://Scenes/MakeYourMask/Prefabs/PainterCanvas.tscn" id="1_iydgg"]
@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bx0qar1udm4ld" path="res://Scenes/MakeYourMask/Prefabs/PaintPalette.tscn" id="2_s3r2p"]
 [ext_resource type="Texture2D" uid="uid://bwx75ku6xxrl2" path="res://Textures/Brish5.png" id="4_ryyya"]
 [ext_resource type="PackedScene" uid="uid://caklxqo0drbqa" path="res://Scenes/MeshGenExample.tscn" id="5_0tiwb"]
+[ext_resource type="Texture2D" uid="uid://bgmr5w8m5fn43" path="res://Textures/UI/woodpanelsquare1.png" id="6_ducfl"]
 [ext_resource type="ArrayMesh" uid="uid://lfbeln2loe40" path="res://Models/sanstoneTILE1_Cube.res" id="6_yp5sp"]
+[ext_resource type="Theme" uid="uid://cgvg25kwoey0m" path="res://Textures/UI/FaceOff_UI_Theme.tres" id="7_8ewdo"]
 [ext_resource type="PackedScene" uid="uid://4un6upeoaxvy" path="res://Models/sanstoneTILE1.glb" id="7_ryyya"]
 
 [sub_resource type="MeshLibrary" id="MeshLibrary_p7jym"]
@@ -53,49 +55,85 @@ layout_mode = 1
 painter_image = NodePath("../../../PainterCanvas")
 current_color_rect = NodePath("../CurrentPaintColor")
 
-[node name="Button_DoneMask" type="Button" parent="Control"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 460.0
-offset_top = 577.0
-offset_right = 555.0
-offset_bottom = 608.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Done Mask"
+[node name="Button_DoneMask" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 389.0
+offset_right = 516.0
+offset_bottom = 901.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_ducfl")
+stretch_mode = 0
 
-[node name="Button_DoneHeightMap" type="Button" parent="Control"]
+[node name="Label" type="Label" parent="Control/Button_DoneMask"]
+z_index = 1
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 760.0
-offset_top = 577.0
-offset_right = 899.0
-offset_bottom = 608.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Done Heightmap"
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -11.5
+offset_right = 57.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_8ewdo")
+text = "Done Mask Shape"
 
-[node name="Button_DonePainting" type="Button" parent="Control"]
+[node name="Button_DoneHeight" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 424.0
+offset_right = 688.0
+offset_bottom = 936.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_ducfl")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Control/Button_DoneHeight"]
+z_index = 1
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 995.0
-offset_top = 577.0
-offset_right = 1112.0
-offset_bottom = 608.0
-grow_horizontal = 0
-grow_vertical = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -11.5
+offset_right = 57.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_8ewdo")
+text = "Done HeightMap"
+
+[node name="Button_DonePainting" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 393.0
+offset_right = 873.0
+offset_bottom = 905.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("6_ducfl")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Control/Button_DonePainting"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -11.5
+offset_right = 57.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_8ewdo")
 text = "Done Painting"
 
 [node name="MeshGenExample" parent="Control" instance=ExtResource("5_0tiwb")]
@@ -121,7 +159,7 @@ visible = false
 
 [connection signal="value_changed" from="Control/PaintPalette/Panel/HSlider" to="Control/PainterCanvas" method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="Control/Button_DoneMask" to="." method="_on_button_done_mask_pressed"]
-[connection signal="pressed" from="Control/Button_DoneHeightMap" to="." method="_on_button_done_height_map_pressed"]
+[connection signal="pressed" from="Control/Button_DoneHeight" to="." method="_on_button_done_height_map_pressed"]
 [connection signal="pressed" from="Control/Button_DonePainting" to="." method="_on_button_done_painting_pressed"]
 
 [editable path="Control/PainterCanvas"]
