@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://cxb624y5iqde2" path="res://Models/beanboi1.gltf" id="4_a0o03"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a0o03"]
+sky_top_color = Color(0, 0.46538925, 0.9625184, 1)
+sky_horizon_color = Color(0, 0.6200841, 0.6179729, 1)
+ground_bottom_color = Color(0.6190873, 0.39617762, 6.738305e-07, 1)
+ground_curve = 0.05278029
 
 [sub_resource type="Sky" id="Sky_u5fwd"]
 sky_material = SubResource("ProceduralSkyMaterial_a0o03")
