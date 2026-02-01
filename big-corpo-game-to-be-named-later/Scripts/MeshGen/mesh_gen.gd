@@ -28,9 +28,9 @@ func _ready() -> void:
 	
 	mesh.mesh = generate_mesh(texture,height)
 	
-	mask_rating.rate_textures(texture,height,texture)
-	texture.load("res://Textures/GMaks.png")
-	mask_rating.rate_textures(texture,height,color)
+	#mask_rating.rate_textures(texture,height,texture)
+	#texture.load("res://Textures/GMaks.png")
+	#mask_rating.rate_textures(texture,height,color)
 	pass # Replace with function body.
 	
 
@@ -50,51 +50,53 @@ func generate_mesh(mask:Image,depth:Image) -> ArrayMesh:
 	
 	var stool := SurfaceTool.new()
 	var indx := 0
+	var sizx:float = mask.get_size().x
+	var sizy:float = mask.get_size().y
 	
 	stool.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for x in range(255):
-		for y in range(255):
+	for x in range(mask.get_size().x-1):
+		for y in range(mask.get_size().y-1):
 			var c := mask.get_pixel(x,y)
 			var h := depth.get_pixel(x,y)
 			var h10 := depth.get_pixel(x+1,y)
 			var h01 := depth.get_pixel(x,y+1)
 			var h11 := depth.get_pixel(x+1,y+1)
 			if(c.r > 0):
-				stool.set_uv(Vector2(x/256.0,y/256.0))
-				stool.add_vertex(Vector3(x-128,y-128,h.r*25.0))
-				stool.add_vertex(Vector3(x-128,y-128+1,h01.r*25.0))
-				stool.add_vertex(Vector3(x-128+1,y-128,h10.r*25.0))
-				stool.add_vertex(Vector3(x-128+1,y-128+1,h11.r*25.0))
+				stool.set_uv(Vector2(x/sizx,y/sizy))
+				stool.add_vertex(Vector3(x-(sizx/2.0),y-(sizy/2.0),h.a*25.0))
+				stool.add_vertex(Vector3(x-(sizx/2.0),y-(sizy/2.0)+1,h01.a*25.0))
+				stool.add_vertex(Vector3(x-(sizx/2.0)+1,y-(sizy/2.0),h10.a*25.0))
+				stool.add_vertex(Vector3(x-(sizx/2.0)+1,y-(sizy/2.0)+1,h11.a*25.0))
 				
 				populate_verticies(stool, indx)
 				
 				indx += 4
 				
-				stool.set_uv(Vector2(x/256.0,y/256.0))
-				stool.add_vertex(Vector3(x-128,y-128,h.r*25.0 - thickness))
-				stool.add_vertex(Vector3(x-128,y-128+1,h01.r*25.0 - thickness))
-				stool.add_vertex(Vector3(x-128+1,y-128,h10.r*25.0 - thickness))
-				stool.add_vertex(Vector3(x-128+1,y-128+1,h11.r*25.0 - thickness))
+				stool.set_uv(Vector2(x/sizx,y/sizy))
+				stool.add_vertex(Vector3(x-(sizx/2.0),y-(sizy/2.0),h.a*25.0 - thickness))
+				stool.add_vertex(Vector3(x-(sizx/2.0),y-(sizy/2.0)+1,h01.a*25.0 - thickness))
+				stool.add_vertex(Vector3(x-(sizx/2.0)+1,y-(sizy/2.0),h10.a*25.0 - thickness))
+				stool.add_vertex(Vector3(x-(sizx/2.0)+1,y-(sizy/2.0)+1,h11.a*25.0 - thickness))
 				
 				populate_verticies(stool, indx)
 				
 				indx += 4
 				
-				stool.set_uv(Vector2(x/256.0,y/256.0))
-				stool.add_vertex(Vector3(x-128,y-128,h.r*25.0))
-				stool.add_vertex(Vector3(x-128,y-128+1,h01.r*25.0))
-				stool.add_vertex(Vector3(x-128,y-128,h.r*25.0 - thickness))
-				stool.add_vertex(Vector3(x-128,y-128+1,h01.r*25.0 - thickness))
+				stool.set_uv(Vector2(x/sizx,y/sizy))
+				stool.add_vertex(Vector3(x-(sizx/2.0),y-(sizy/2.0),h.a*25.0))
+				stool.add_vertex(Vector3(x-(sizx/2.0),y-(sizy/2.0)+1,h01.a*25.0))
+				stool.add_vertex(Vector3(x-(sizx/2.0),y-(sizy/2.0),h.a*25.0 - thickness))
+				stool.add_vertex(Vector3(x-(sizx/2.0),y-(sizy/2.0)+1,h01.a*25.0 - thickness))
 				
 				populate_verticies(stool, indx)
 				
 				indx += 4
 				
-				stool.set_uv(Vector2(x/256.0,y/256.0))
-				stool.add_vertex(Vector3(x-128+1,y-128,h10.r*25.0))
-				stool.add_vertex(Vector3(x-128+1,y-128+1,h11.r*25.0))
-				stool.add_vertex(Vector3(x-128+1,y-128,h10.r*25.0 - thickness))
-				stool.add_vertex(Vector3(x-128+1,y-128+1,h11.r*25.0 - thickness))
+				stool.set_uv(Vector2(x/sizx,y/sizy))
+				stool.add_vertex(Vector3(x-(sizx/2.0)+1,y-(sizy/2.0),h10.a*25.0))
+				stool.add_vertex(Vector3(x-(sizx/2.0)+1,y-(sizy/2.0)+1,h11.a*25.0))
+				stool.add_vertex(Vector3(x-(sizx/2.0)+1,y-(sizy/2.0),h10.a*25.0 - thickness))
+				stool.add_vertex(Vector3(x-(sizx/2.0)+1,y-(sizy/2.0)+1,h11.a*25.0 - thickness))
 				
 				populate_verticies(stool, indx)
 				

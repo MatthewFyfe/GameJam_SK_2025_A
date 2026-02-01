@@ -27,6 +27,8 @@ class_name PainterCanvas
 @export var img: Image
 var brush_img : Image
 
+var prev_mouse_pos:Vector2 = Vector2.ZERO
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:	
 	#demo_paint_system()	
@@ -89,7 +91,7 @@ func _paint_tex(pos) -> void:
 func update_brush() -> void:
 	if brush_texture != null :
 		brush_img = brush_texture.get_image()
-		brush_img.resize(brush_size, brush_size)
+		brush_img.resize(brush_size, brush_size, Image.INTERPOLATE_NEAREST)
 		
 		for x in brush_img.get_size().x:
 				for y in brush_img.get_size().y:
@@ -105,8 +107,11 @@ func _input(event: InputEvent) -> void:
 			if event.button_index == MOUSE_BUTTON_LEFT:
 				var localPosition = to_local(event.position)
 				var imgPosition = localPosition-offset+get_rect().size/2.0
-				_paint_tex(imgPosition)
-				texture.update(img)
+				
+				if((imgPosition - prev_mouse_pos).length_squared() >28):
+					prev_mouse_pos = imgPosition
+					_paint_tex(imgPosition)
+					texture.update(img)
 			
 			#right click to mimic color
 			if event.button_index == MOUSE_BUTTON_RIGHT:
@@ -135,7 +140,7 @@ func _input(event: InputEvent) -> void:
 
 #Player modified brush size
 func _on_h_slider_value_changed(value: float) -> void:
-	brush_size = int(value)
+	brush_size = int(value)*10
 
 #Possible fix if we run into mipmap issues on 3D model
 func mipmapFix() -> void:
